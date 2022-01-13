@@ -6,55 +6,22 @@ function shouldShowSubmissionData()
 }
 
 /**
- * Gets the first name, users variable assignemnt (setting a variable to a value)
- * and returns that variable 
+ * function with parameters
+ * $key is the key in the $_POST array that we want to access
  */
-function getFirstName() 
+function getPostDataWithDefault($key)
 {
-    $firstName = null;
-    if (array_key_exists('first_name', $_POST)) {
-        $firstName = $_POST['first_name'];
+    if (array_key_exists($key, $_POST)) {
+        return $_POST[$key];
     }
-    return $firstName;
-}
-/**
- * Users an early retiurn to return the submitted la\st_name
- */
-function getLastName()
-{
-    if (array_key_exists('last_name', $_POST)) {
-        return $_POST['first_name'];
-    }
-
-    return "No Last Name";
+    return "";
 }
 
-function getEmail()
-{
-    if (array_key_exists('email', $_POST)) {
-        return $_POST['email'];
-    } else {    
-        return "No Email";
-    }
-
-}
-
-var_dump(getFirstName());
-var_dump(getLastName());
-
-die;
-
-$postData = $_POST;
-$firstName = null;
-$lastName = null;
-$email = null;
+$firstName = getPostDataWithDefault('first_name');
+$lastName = getPostDataWithDefault('last_name');
+$email = getPostDataWithDefault('email');
+$comments = getPostDataWithDefault('comments');
 $showSubmissionData = shouldShowSubmissionData();
-
-
-
-if (array_key_exists('email', $postData)) {
-    $email = $postData['email'];
-}
 
 ?>
 
@@ -89,6 +56,9 @@ if (array_key_exists('email', $postData)) {
         </p>
         <p>
         <?php echo $email; ?>
+        </p>
+        <p>
+        <?php echo $comments; ?>
         </p>
     </div>
     <?php } ?>
